@@ -7,7 +7,7 @@ class Genre(models.Model):
     description = models.TextField()
 
     artist = models.ManyToManyField(
-        'Artist',
+        'AppMusic.Artist',
         related_name='artists_ref',
     )
 

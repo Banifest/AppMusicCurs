@@ -1,7 +1,7 @@
-from AppMusic.serializers.artist_serializer import ArtistSerializer
-from AppMusic.serializers.composition_serializer import CompositionSerializer
-from AppMusic.serializers.genre_serializer import GenreSerializer
-from AppMusic.serializers.user_serializer import UserSerializer
+from AppMusic.serializers.artistserializer import ArtistSerializer
+from AppMusic.serializers.compositionserializer import CompositionSerializer
+from AppMusic.serializers.genreserializer import GenreSerializer
+from AppMusic.serializers.userserializer import UserSerializer
 
 __all__ = [
     ArtistSerializer,

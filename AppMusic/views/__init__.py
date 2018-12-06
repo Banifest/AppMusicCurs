@@ -1,9 +1,11 @@
-from mainApp.views.GroupView import GroupViewSet
-from mainApp.views.ReferenceView import ReferenceViewSet
-from mainApp.views.UserView import UserViewSet
+from AppMusic.views.artistview import ArtistViewSet
+from AppMusic.views.compositionview import CompositionViewSet
+from AppMusic.views.genreview import GenreViewSet
+from AppMusic.views.userview import UserViewSet
 
 __all__ = [
-    ReferenceViewSet,
-    GroupViewSet,
+    ArtistViewSet,
+    CompositionViewSet,
+    GenreViewSet,
     UserViewSet,
 ]

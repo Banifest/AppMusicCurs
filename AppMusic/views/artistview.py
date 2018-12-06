@@ -1,7 +1,7 @@
-from rest_framework import permissions, viewsets
+from rest_framework import viewsets
 
-from AppMusic.models import Genre, Artist
-from AppMusic.serializers import GenreSerializer, ArtistSerializer
+from AppMusic.models import Artist
+from AppMusic.serializers import ArtistSerializer
 
 
 class ArtistViewSet(viewsets.ModelViewSet):

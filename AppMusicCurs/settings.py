@@ -25,8 +25,9 @@ SECRET_KEY = 'p3qe9mj(82jqa+7q5+nz9(*#69!ten7cxlsv0&xx1knsioqzut'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+AUTH_USER_MODEL = "AppMusic.User"
 
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'AppMusic.apps.AppmusicConfig',
 ]
 
@@ -54,10 +56,7 @@ ROOT_URLCONF = 'AppMusicCurs.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2'
-        ,
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
