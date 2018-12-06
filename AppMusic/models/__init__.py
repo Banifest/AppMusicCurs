@@ -1,6 +1,6 @@
-from AppMusic.models.Artist import Artist
-from AppMusic.models.Composition import Composition
-from AppMusic.models.Genre import Genre
+from AppMusic.models.artist import Artist
+from AppMusic.models.composition import Composition
+from AppMusic.models.genre import Genre
 
 __all__ = {
     Artist,
