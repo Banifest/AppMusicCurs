@@ -10,7 +10,6 @@ class Artist(models.Model):
     genres = models.ManyToManyField(
         'Genre',
         related_name='genres_ref',
-        on_delete=models.CASCADE
     )
 
     class Meta:
