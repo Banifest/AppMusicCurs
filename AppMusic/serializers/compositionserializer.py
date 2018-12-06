@@ -23,5 +23,7 @@ class CompositionSerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'url',
             'albums',
-            'description'
+            'description',
+            'artist',
+            'genre'
         )

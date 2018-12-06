@@ -4,11 +4,11 @@ from AppMusic.models import Composition
 
 
 class GenreSerializer(serializers.HyperlinkedModelSerializer):
-    # user = serializers.HyperlinkedRelatedField(
-    #         view_name='user-detail',
-    #         read_only=True,
-    #         lookup_field='username'
-    # )
+    artist = serializers.SlugRelatedField(
+        slug_field='name',
+        read_only=False,
+        queryset=Composition.objects.filter().all()
+    )
     #
     # group = serializers.SlugRelatedField(
     #     slug_field='id',
@@ -21,5 +21,6 @@ class GenreSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'guid',
             'name',
-            'description'
+            'description',
+            'artist'
         )

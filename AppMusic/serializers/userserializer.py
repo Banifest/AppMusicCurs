@@ -17,4 +17,5 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'first_name',
             'last_name',
             'email',
+            'favorites'
         )
