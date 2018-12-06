@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Composition(models.Model):
-    guid = models.UUIDField(primary_key=True)
+    guid = models.UUIDField(primary_key=True, auto_created=True)
     name = models.TextField()
     url = models.URLField()
     albums = models.TextField()
