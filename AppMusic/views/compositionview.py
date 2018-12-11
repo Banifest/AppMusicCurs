@@ -1,3 +1,5 @@
+import uuid
+
 from rest_framework import viewsets
 
 from AppMusic.models import Composition
@@ -8,6 +10,9 @@ class CompositionViewSet(viewsets.ModelViewSet):
     queryset = Composition.objects.all()
     serializer_class = CompositionSerializer
     lookup_field = 'guid'
+
+    def perform_create(self, serializer):
+        serializer.save(guid=uuid.uuid4())
 
     #
     # def retrieve(self, request, *args, **kwargs):

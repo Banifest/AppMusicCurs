@@ -6,6 +6,8 @@ class User(AbstractUser):
     favorites = models.ManyToManyField(
         'AppMusic.Composition',
         related_name='composition_ref',
+        blank=True,
+        null=True,
     )
 
     def __str__(self):

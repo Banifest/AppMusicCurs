@@ -7,9 +7,10 @@ class Artist(models.Model):
     create_date = models.DateField()
     albums = models.TextField()
     description = models.TextField()
-    genres = models.ManyToManyField(
+    primary_genre = models.ForeignKey(
         'AppMusic.Genre',
-        related_name='genres_ref',
+        related_name="primary_genre",
+        on_delete=models.CASCADE
     )
 
     class Meta:

@@ -6,7 +6,7 @@ from AppMusic.models import Artist
 class ArtistSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='artist-detail',
-        lookup_field='guid'
+        lookup_field='name'
     )
 
     class Meta:
@@ -16,5 +16,6 @@ class ArtistSerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'create_date',
             'albums',
-            'description'
+            'description',
+            'primary_genres',
         )
