@@ -1,3 +1,5 @@
+import uuid
+
 from rest_framework import viewsets
 
 from AppMusic.models import Artist
@@ -8,6 +10,9 @@ class ArtistViewSet(viewsets.ModelViewSet):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
     lookup_field = 'guid'
+
+    def perform_create(self, serializer):
+        serializer.save(guid=str(uuid.uuid4()))
 
     # def retrieve(self, request, *args, **kwargs):
     #     pk = kwargs['pk']

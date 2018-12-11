@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpRequest, HttpResponse
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from AppMusic.models import User
@@ -70,17 +69,17 @@ class UserViewSet(viewsets.ModelViewSet):
             res.status_code = 400
             return res
 
-    def retrieve(self, request, *args, **kwargs):
-        pk = kwargs['username']
-        queryset = User.objects.filter(username=pk)
-        instance = get_object_or_404(queryset, username=pk)
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
-
-    def perform_create(self, serializer):
-        if 'password' not in self.request.data or self.request.data['password'] == '':
-            return Response('{"detail": "password is empty"}')
-        serializer.save()
-        user = User.objects.filter(username=self.request.data['username']).first()
-        user.set_password(self.request.data['password'])
-        user.save()
+    # def retrieve(self, request, *args, **kwargs):
+    #     pk = kwargs['username']
+    #     queryset = User.objects.filter(username=pk)
+    #     instance = get_object_or_404(queryset, username=pk)
+    #     serializer = self.get_serializer(instance)
+    #     return Response(serializer.data)
+    #
+    # def perform_create(self, serializer):
+    #     if 'password' not in self.request.data or self.request.data['password'] == '':
+    #         return Response('{"detail": "password is empty"}')
+    #     serializer.save()
+    #     user = User.objects.filter(username=self.request.data['username']).first()
+    #     user.set_password(self.request.data['password'])
+    #     user.save()

@@ -24,7 +24,7 @@ class GenreSerializer(serializers.HyperlinkedModelSerializer):
 
     url = serializers.HyperlinkedIdentityField(
         view_name='genre-detail',
-        lookup_field='guid'
+        lookup_field='name'
     )
 
     class Meta:
