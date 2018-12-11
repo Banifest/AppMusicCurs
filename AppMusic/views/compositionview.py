@@ -7,6 +7,7 @@ from AppMusic.serializers import CompositionSerializer
 class CompositionViewSet(viewsets.ModelViewSet):
     queryset = Composition.objects.all()
     serializer_class = CompositionSerializer
+    lookup_field = 'guid'
 
     #
     # def retrieve(self, request, *args, **kwargs):

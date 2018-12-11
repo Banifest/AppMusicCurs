@@ -7,6 +7,7 @@ from AppMusic.serializers import ArtistSerializer
 class ArtistViewSet(viewsets.ModelViewSet):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
+    lookup_field = 'guid'
 
     # def retrieve(self, request, *args, **kwargs):
     #     pk = kwargs['pk']

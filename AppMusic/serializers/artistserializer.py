@@ -4,16 +4,15 @@ from AppMusic.models import Artist
 
 
 class ArtistSerializer(serializers.HyperlinkedModelSerializer):
-    # user = serializers.HyperlinkedRelatedField(
-    #         view_name='user-detail',
-    #         read_only=True,
-    #         lookup_field='username'
-    # )
+    url = serializers.HyperlinkedIdentityField(
+        view_name='artist-detail',
+        lookup_field='guid'
+    )
 
     class Meta:
         model = Artist
         fields = (
-            'guid',
+            'url',
             'name',
             'create_date',
             'albums',

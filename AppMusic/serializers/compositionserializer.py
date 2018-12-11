@@ -16,12 +16,17 @@ class CompositionSerializer(serializers.HyperlinkedModelSerializer):
     #     queryset=Group.objects.filter().all()
     # )
 
+    url = serializers.HyperlinkedIdentityField(
+        view_name='composition-detail',
+        lookup_field='guid'
+    )
+
     class Meta:
         model = Composition
         fields = (
-            'guid',
-            'name',
             'url',
+            'name',
+            'composition_url',
             'albums',
             'description',
             'artist',
