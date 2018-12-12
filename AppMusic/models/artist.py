@@ -7,10 +7,11 @@ class Artist(models.Model):
     create_date = models.DateField()
     albums = models.TextField()
     description = models.TextField()
-    genres = models.ManyToManyField(
-        'AppMusic.Genre',
-        related_name='genres_ref',
-    )
+
+    # genres = models.ManyToManyField(
+    #     'AppMusic.Genre',
+    #     related_name='genres_ref',
+    # )
 
     class Meta:
         ordering = ('name',)

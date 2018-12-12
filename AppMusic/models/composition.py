@@ -10,12 +10,12 @@ class Composition(models.Model):
 
     artist = models.ForeignKey(
         'AppMusic.Artist',
-        # related_name='artist_ref',
+        related_name='artist_ref',
         on_delete=models.CASCADE
     )
     genre = models.ForeignKey(
         'AppMusic.Genre',
-        # related_name='genre_ref',
+        related_name='genre_ref',
         on_delete=models.CASCADE
     )
 
