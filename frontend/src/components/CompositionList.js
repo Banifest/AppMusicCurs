@@ -18,7 +18,7 @@ const CompositionList = ({data}) =>
                     {Object.entries(data[0]).map((item) => {
                             switch (item[0]) {
                                 case "url":
-                                    return (<h6/>);
+                                    break;
                                 case "name":
                                     return (<td key={key(item)}>Name of composition</td>);
                                 case "albums":
@@ -42,7 +42,7 @@ const CompositionList = ({data}) =>
                         {Object.entries(element).map((item) => {
                                 switch (item[0]) {
                                     case "url":
-                                        return (<h6/>);
+                                        break;
                                     case "name":
                                         return (<td key={key(item)}>{item[1]}</td>);
                                     case "albums":

@@ -30,9 +30,10 @@ class ArtistViewSet(viewsets.ModelViewSet):
 
     @action(methods=['GET'], detail=False, url_path='composition_name')
     def composition_name(self, request: HttpRequest):
-        if 'name' in request.query_params:
-            raise Http404()
-        compositions = Composition.objects.filter(artist__name=request.query_params['name'])
+        if 'search_by_artist' not in request.query_params:
+            compositions = Composition.objects.all()
+        else:
+            compositions = Composition.objects.filter(artist__name=request.query_params['search_by_artist'])
         if len(compositions) == 0:
             raise Http404()
         serializer = CompositionSerializer(compositions, many=True, context={'request': request})
