@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import LogOut from "./LogOut";
 
-class Header extends Component {
+class LogOut extends Component {
     static propTypes = {
         endpoint: PropTypes.string,
     };
@@ -18,12 +17,10 @@ class Header extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.onClick.bind(this)} value={this.state.endpoint}>Main</button>
-                <button onClick={this.onClick.bind(this)} value={this.state.endpoint + "composition/"}>Composition</button>
-                <LogOut/>
+                <button onClick={this.onClick.bind(this)}>LogOut</button>
             </div>
         );
     }
 }
 
-export default Header;
+export default LogOut;
