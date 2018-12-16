@@ -75,11 +75,11 @@ class UserViewSet(viewsets.ModelViewSet):
     #     instance = get_object_or_404(queryset, username=pk)
     #     serializer = self.get_serializer(instance)
     #     return Response(serializer.data)
-    #
-    # def perform_create(self, serializer):
-    #     if 'password' not in self.request.data or self.request.data['password'] == '':
-    #         return Response('{"detail": "password is empty"}')
-    #     serializer.save()
-    #     user = User.objects.filter(username=self.request.data['username']).first()
-    #     user.set_password(self.request.data['password'])
-    #     user.save()
+
+    def perform_create(self, serializer):
+        if 'password' not in self.request.data or self.request.data['password'] == '':
+            return Response('{"detail": "password is empty"}')
+        serializer.save()
+        user = User.objects.filter(username=self.request.data['username']).first()
+        user.set_password(self.request.data['password'])
+        user.save()
