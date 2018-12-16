@@ -11,7 +11,7 @@ import Header from "./components/Header";
 const App = () => (
     <React.Fragment>
         <Header />
-        <CompositionList endpoint="http://127.0.0.1:8000/api/composition/" render={data => <Table data={data}/>}/>
+        <DataProvider endpoint="http://127.0.0.1:8000/api/composition/" render={data => <CompositionList data={data}/>}/>
     </React.Fragment>
 );
 const wrapper = document.getElementById("app");
