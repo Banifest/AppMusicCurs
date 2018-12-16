@@ -5,6 +5,7 @@ import CompositionList from "./components/CompositionList";
 import Header from "./components/Header";
 import SearchByArtist from "./components/SearchByArtist";
 import CompProvider from "./components/CompProvider";
+import SearchByGenre from "./components/SearchByGenre";
 
 var urlParams;
 (window.onpopstate = function () {
@@ -33,11 +34,16 @@ class App extends React.Component {
             placeholder: "Loading...",
             state: "http://127.0.0.1:8000/",
             filterType: 1,
-            name: ""
+            artist_name: "",
+            genre_name: ""
         };
-        console.log(urlParams)
+        console.log(urlParams);
         if (urlParams["search_by_artist"] !== undefined) {
-            this.state.name = urlParams["search_by_artist"];
+            this.state.artist_name = urlParams["search_by_artist"];
+        }
+        if(urlParams["search_by_genre"] !== undefined)
+        {
+            this.state.genre_name = urlParams["search_by_genre"];
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -46,21 +52,41 @@ class App extends React.Component {
 
 
     handleChange(event) {
-        this.setState({
-            name: event.target.value
-        });
+        switch (event.target.name) {
+            case "search_by_artist":
+                this.setState({
+                    artist_name: event.target.value
+                });
+                break;
+            case "search_by_genre":
+                this.setState({
+                    genre_name: event.target.value
+                });
+                break;
+        }
+
     }
 
     handleClick(event) {
-        this.setState({
-            inputValue: event.target.value
-        });
+        // this.setState({
+        //     inputValue: event.target.value
+        // });
     }
 
     componentWillMount() {
         if (urlParams["search_by_artist"] !== undefined) {
             this.state.name = urlParams["search_by_artist"];
-            fetch("http://127.0.0.1:8000/api/artist/composition_name/?search_by_artist=" + this.state.name)
+            fetch("http://127.0.0.1:8000/api/artist/composition_name/?search_by_artist=" + this.state.artist_name)
+                .then(response => {
+                    if (response.status !== 200) {
+                        return this.setState({placeholder: "Something went wrong"});
+                    }
+                    return response.json();
+                })
+                .then(data => this.setState({data: data, loaded: true}));
+        } else if (urlParams["search_by_genre"] !== undefined) {
+            this.state.name = urlParams["search_by_artist"];
+            fetch("http://127.0.0.1:8000/api/genre/composition_name/?search_by_genre=" + this.state.genre_name)
                 .then(response => {
                     if (response.status !== 200) {
                         return this.setState({placeholder: "Something went wrong"});
@@ -78,6 +104,7 @@ class App extends React.Component {
                 <br/>
                 <CompositionList data={this.state.data}/>
                 <SearchByArtist handleChange={this.handleChange} handleClick={this.handleClick}/>
+                <SearchByGenre handleChange={this.handleChange} handleClick={this.handleClick}/>
             </React.Fragment>
         );
     }
