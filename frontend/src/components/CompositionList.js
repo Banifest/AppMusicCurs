@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import key from "weak-key";
 import Table from "./Table";
+import ValueOfEntity from "./ValueOfEntity";
 
 const CompositionList = ({data}) =>
     !data.length ? (
@@ -50,7 +51,11 @@ const CompositionList = ({data}) =>
                                     case "description":
                                         return (<td key={key(item)}>{item[1]}</td>);
                                     case "artist":
-                                        return (<td key={key(item)}>Artist</td>);
+                                        return (<td key={key(item)}>
+                                            <ValueOfEntity
+                                                endpoint={"http://127.0.0.1:8000/api/artist/" + item[1]}
+                                                render={(data)=>{ return (<div>{data.name}</div>)}}
+                                            /></td>);
                                     case "genre":
                                         return (<td key={key(item)}>{item[1]}</td>);
                                     case "composition_url":

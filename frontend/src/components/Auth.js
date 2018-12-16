@@ -44,10 +44,8 @@ class Auth extends Component {
 
     componentWillMount() {
         fetch(this.props.endpoint)
-            .then(response =>
-            {
-                if (response.status !== 403)
-                {
+            .then(response => {
+                if (response.status !== 403) {
                     window.location.replace("http://127.0.0.1:8000/composition/");
                 }
                 return response.json();
@@ -57,40 +55,42 @@ class Auth extends Component {
     render() {
         const {username, password} = this.state;
         return (
-            <form onSubmit={this.handleSubmit}>
-                <h1 align="center"><b>Auth</b></h1>
-                <div className="field">
-                    <label className="label">Username</label>
-                    <div className="control">
-                        <input
-                            className="input"
-                            type="text"
-                            name="username"
-                            onChange={this.handleChange.bind(this)}
-                            value={username}
-                            required
-                        />
+            <div align="center">
+                <form onSubmit={this.handleSubmit}>
+                    <h1 align="center"><b>Auth</b></h1>
+                    <div className="field">
+                        <label className="label">Username</label>
+                        <div className="control">
+                            <input
+                                className="input"
+                                type="text"
+                                name="username"
+                                onChange={this.handleChange.bind(this)}
+                                value={username}
+                                required
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="field">
-                    <label className="label">Password</label>
-                    <div className="control">
-                        <input
-                            className="input"
-                            type="password"
-                            name="password"
-                            onChange={this.handleChange.bind(this)}
-                            value={password}
-                            required
-                        />
+                    <div className="field">
+                        <label className="label">Password</label>
+                        <div className="control">
+                            <input
+                                className="input"
+                                type="password"
+                                name="password"
+                                onChange={this.handleChange.bind(this)}
+                                value={password}
+                                required
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="control">
-                    <button type="submit" className="button is-info">
-                        Auth
-                    </button>
-                </div>
-            </form>
+                    <div className="control">
+                        <button type="submit" className="button is-info">
+                            Auth
+                        </button>
+                    </div>
+                </form>
+            </div>
         );
     }
 }

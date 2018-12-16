@@ -6,9 +6,9 @@ import Footer from "./components/Footer";
 import Registration from "./components/Registration";
 
 const App = () => (
-    <React.Fragment>
+    <React.Fragment align="center">
         <Header headerType={1}/>
-        <Registration endpoint="api/user/" />
+        <Registration endpoint="http://127.0.0.1:8000/api/user/" />
         <Footer />
     </React.Fragment>
 );

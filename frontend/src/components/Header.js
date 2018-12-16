@@ -17,7 +17,7 @@ class Header extends Component {
 
     render() {
         return (
-            <div>
+            <div align="center">
                 <button
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint}
@@ -25,6 +25,7 @@ class Header extends Component {
                 >
                     Main
                 </button>
+                <br />
                 <button
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint + "composition/"}
@@ -32,6 +33,7 @@ class Header extends Component {
                 >
                     Composition
                 </button>
+                {this.props.headerType === 1 && <br />}
                 {this.props.headerType === 1 && <button
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint + "registration/"}
@@ -40,7 +42,9 @@ class Header extends Component {
                 >
                     Registration
                 </button>}
+                {this.props.headerType === 2 && <br />}
                 {this.props.headerType === 2 && <LogOut/>}
+                <br />
             </div>
         );
     }
