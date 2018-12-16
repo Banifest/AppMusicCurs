@@ -12,6 +12,15 @@ class CompositionList extends React.Component {
         placeholder: "Loading..."
     };
 
+    componentWillMount() {
+        fetch(this.props.endpoint)
+            .then(response => {
+                if (response.status === 403) {
+                    window.location.replace("http://127.0.0.1:8000/");
+                }
+            });
+    }
+
     componentDidMount() {
         fetch(this.props.endpoint)
             .then(response => {
@@ -32,3 +41,5 @@ class CompositionList extends React.Component {
         );
     }
 }
+
+export default CompositionList;

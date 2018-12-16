@@ -34,19 +34,31 @@ class Auth extends Component {
             body: JSON.stringify(lead),
             headers: new Headers({"Content-Type": "application/json"})
         };
-        fetch("/api/user/" + this.state.username + "/login/", conf).then((response )=> {
+        fetch("/api/user/" + this.state.username + "/login/", conf).then((response) => {
             console.log(response);
-            if(response.status === 201)
-            {
+            if (response.status === 201) {
                 window.location.replace("/composition/");
             }
         });
     };
 
+    componentWillMount() {
+        fetch(this.props.endpoint)
+            .then(response =>
+            {
+                if (response.status !== 403)
+                {
+                    window.location.replace("http://127.0.0.1:8000/composition/");
+                }
+                return response.json();
+            });
+    }
+
     render() {
         const {username, password} = this.state;
         return (
             <form onSubmit={this.handleSubmit}>
+                <h1 align="center"><b>Auth</b></h1>
                 <div className="field">
                     <label className="label">Username</label>
                     <div className="control">

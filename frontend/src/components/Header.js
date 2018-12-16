@@ -18,8 +18,20 @@ class Header extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.onClick.bind(this)} value={this.state.endpoint}>Main</button>
-                <button onClick={this.onClick.bind(this)} value={this.state.endpoint + "composition/"}>Composition</button>
+                <button
+                    onClick={this.onClick.bind(this)}
+                    value={this.state.endpoint}
+                    className="button is-info"
+                >
+                    Main
+                </button>
+                <button
+                    onClick={this.onClick.bind(this)}
+                    value={this.state.endpoint + "composition/"}
+                    className="button is-error"
+                >
+                    Composition
+                </button>
                 <LogOut/>
             </div>
         );

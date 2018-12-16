@@ -18,10 +18,6 @@ class Footer extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.onClick.bind(this)} value={this.state.endpoint}>Main</button>
-                <button onClick={this.onClick.bind(this)} value={this.state.endpoint + "composition/"}>Composition</button>
-                <button onClick={this.onClick.bind(this)} value={this.state.endpoint + "search/"}>Composition</button>
-                <LogOut/>
             </div>
         );
     }

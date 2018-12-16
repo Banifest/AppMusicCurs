@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import CSRFToken from "./CRFSToken";
 
 class Registration extends Component {
     static propTypes = {
@@ -60,7 +59,7 @@ class Registration extends Component {
         const {username, password, email, first_name, last_name} = this.state;
         return (
             <form onSubmit={this.handleSubmit}>
-                <CSRFToken />
+                <h1 align="center"><b>Registration</b></h1>
                 <div className="field">
                     <label className="label">Username</label>
                     <div className="control">
