@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import key from "weak-key";
-import Table from "./Table";
 import ValueOfEntity from "./ValueOfEntity";
 
 const CompositionList = ({data}) =>

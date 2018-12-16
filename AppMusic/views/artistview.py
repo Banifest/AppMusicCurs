@@ -1,9 +1,14 @@
+import json
 import uuid
 
+from django.http import HttpRequest, HttpResponse
 from rest_framework import viewsets, permissions
+from rest_framework.decorators import action
+from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
 
-from AppMusic.models import Artist
-from AppMusic.serializers import ArtistSerializer
+from AppMusic.models import Artist, Composition
+from AppMusic.serializers import ArtistSerializer, CompositionSerializer
 
 
 class ArtistViewSet(viewsets.ModelViewSet):
@@ -18,28 +23,8 @@ class ArtistViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(guid=str(uuid.uuid4()))
 
-    # def retrieve(self, request, *args, **kwargs):
-    #     pk = kwargs['pk']
-    #     users_pk = kwargs['users_username']
-    #     user = User.objects.get(username=users_pk)
-    #     queryset = Group.objects.filter(pk=pk, user=user)
-    #     instance = get_object_or_404(queryset, pk=pk)
-    #     serializer = self.get_serializer(instance)
-    #     return Response(serializer.data)
-    #
-    # def list(self, request, *args, **kwargs):
-    #     users_pk = kwargs['users_username']
-    #     user = User.objects.get(username=users_pk)
-    #     queryset = Group.objects.filter(user=user)
-    #     page = self.paginate_queryset(queryset)
-    #     if page is not None:
-    #         serializer = self.get_serializer(page, many=True)
-    #         return self.get_paginated_response(serializer.data)
-    #     else:
-    #         serializer = self.get_serializer(queryset, many=True)
-    #         return Response(serializer.data)
-    #
-    # def perform_create(self, serializer):
-    #     serializer.save(
-    #             user=self.request.user
-    #     )
+    @action(methods=['GET'], detail=True, url_path='composition')
+    def composition(self, request: HttpRequest, guid: str):
+        instance = Composition.objects.filter(artist=guid)
+        serializer = CompositionSerializer(instance, many=True, context={'request': request})
+        return Response(serializer.data)
