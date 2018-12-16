@@ -32,17 +32,16 @@ class SearchByArtist extends Component {
     //     }
     // };
 
-    // handleSubmit = e => {
-    //     e.preventDefault();
-    //     const {name} = this.state;
-    //     const lead = {name};
-    //     const conf = {
-    //         method: "get",
-    //         query: "name=" + this.state.name,
-    //     };
-    //     fetch("http://127.0.0.1:8000/api/artist/composition_name/", conf)
-    //         .then(response => console.log(response));
-    // };
+    handleSubmit = e => {
+        e.preventDefault();
+        const {name} = this.state;
+        const lead = {name};
+        const conf = {
+            method: "get",
+        };
+        fetch("http://127.0.0.1:8000/api/artist/composition_name/?search_by_artist=" + this.state.name, conf)
+            .then(response => console.log(response));
+    };
 
     render() {
         return (
@@ -62,9 +61,8 @@ class SearchByArtist extends Component {
                     </div>
                     <div className="control">
                         <button
-                            type="submit"
+                            type="button"
                             className="button is-info"
-                            onClick={this.props.handleClick}
                         >
                             Search
                         </button>

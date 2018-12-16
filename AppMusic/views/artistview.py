@@ -1,7 +1,7 @@
 import json
 import uuid
 
-from django.http import HttpRequest, Http404
+from django.http import HttpRequest, Http404, HttpResponse
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -35,6 +35,10 @@ class ArtistViewSet(viewsets.ModelViewSet):
         else:
             compositions = Composition.objects.filter(artist__name=request.query_params['search_by_artist'])
         if len(compositions) == 0:
-            raise Http404()
+            HttpResponse(
+                json.dumps({'detail': "Not found composition"}),
+                status=400,
+                content_type='application/json'
+            )
         serializer = CompositionSerializer(compositions, many=True, context={'request': request})
         return Response(serializer.data)
