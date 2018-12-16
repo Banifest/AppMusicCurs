@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import CSRFToken from "./CRFSToken";
 
-class Auth extends Component {
+class Registration extends Component {
     static propTypes = {
         endpoint: PropTypes.string.isRequired
     };
@@ -45,8 +46,8 @@ class Auth extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const {username, password} = this.state;
-        const lead = {username, password};
+        const {username, password, email, first_name, last_name} = this.state;
+        const lead = {username, password, email, first_name, last_name};
         const conf = {
             method: "post",
             body: JSON.stringify(lead),
@@ -59,6 +60,7 @@ class Auth extends Component {
         const {username, password, email, first_name, last_name} = this.state;
         return (
             <form onSubmit={this.handleSubmit}>
+                <CSRFToken />
                 <div className="field">
                     <label className="label">Username</label>
                     <div className="control">
@@ -132,4 +134,4 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+export default Registration;

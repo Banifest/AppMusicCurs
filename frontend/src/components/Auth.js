@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import CSRFToken from "./CRFSToken";
 
 class Auth extends Component {
     static propTypes = {
@@ -9,20 +10,22 @@ class Auth extends Component {
         username: "",
         password: ""
     };
+
     handleChange(event) {
-        if(event.target.name === "username")
-        {
-            this.setState({
-                username: event.target.value
-            });
-        }
-        else if(event.target.name === "password")
-        {
-            this.setState({
-                password: event.target.value
-            });
+        switch (event.target.name) {
+            case  "username":
+                this.setState({
+                    username: event.target.value
+                });
+                break;
+            case "password":
+                this.setState({
+                    password: event.target.value
+                });
+                break;
         }
     };
+
     handleSubmit = event => {
         event.preventDefault();
         const {username, password} = this.state;
@@ -32,13 +35,14 @@ class Auth extends Component {
             body: JSON.stringify(lead),
             headers: new Headers({"Content-Type": "application/json"})
         };
-        fetch("/api/user/"+this.state.username+"/login/", conf).then(response => console.log(response));
+        fetch("/api/user/" + this.state.username + "/login/", conf).then(response => console.log(response));
     };
 
     render() {
-        const {username, password} = this.state;
+        const {username, password, csrfmiddlewaretoken} = this.state;
         return (
             <form onSubmit={this.handleSubmit}>
+                <CSRFToken/>
                 <div className="field">
                     <label className="label">Username</label>
                     <div className="control">
