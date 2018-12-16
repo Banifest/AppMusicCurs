@@ -8,6 +8,10 @@ def index(request):
     return render(request, 'frontend/index.html')
 
 
+def registration(request):
+    return render(request, 'frontend/registration.html')
+
+
 def composition(request):
     return render(request, 'frontend/composition.html')
 

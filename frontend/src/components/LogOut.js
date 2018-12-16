@@ -17,7 +17,12 @@ class LogOut extends Component {
     render() {
         return (
             <div>
-                <button className="button is-info" onClick={this.onClick.bind(this)}>LogOut</button>
+                <button
+                    className="button is-info"
+                    onClick={this.onClick.bind(this)}
+                >
+                    LogOut
+                </button>
             </div>
         );
     }

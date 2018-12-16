@@ -1,15 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Auth from "./Auth";
-import Registration from "./Registration";
-import Header from "./Header";
-import Footer from "./Footer";
+import Auth from "./components/Auth";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Registration from "./components/Registration";
 
 const App = () => (
     <React.Fragment>
         <Header headerType={1}/>
-        <br />
-        <Auth endpoint="api/user/login" />
+        <Registration endpoint="api/user/" />
         <Footer />
     </React.Fragment>
 );
