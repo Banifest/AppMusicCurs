@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 
 from rest_framework import viewsets
 
@@ -10,6 +10,10 @@ class GenreViewSet(viewsets.ModelViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
     lookup_field = 'name'
+
+    permission_classes = (
+        permissions.IsAuthenticated,
+    )
 
     # def retrieve(self, request, *args, **kwargs):
     #     pk = kwargs['pk']

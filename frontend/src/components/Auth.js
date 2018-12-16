@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import CSRFToken from "./CRFSToken";
 
 class Auth extends Component {
     static propTypes = {
@@ -35,14 +34,19 @@ class Auth extends Component {
             body: JSON.stringify(lead),
             headers: new Headers({"Content-Type": "application/json"})
         };
-        fetch("/api/user/" + this.state.username + "/login/", conf).then(response => console.log(response));
+        fetch("/api/user/" + this.state.username + "/login/", conf).then((response )=> {
+            console.log(response);
+            if(response.status === 201)
+            {
+                window.location.replace("/composition/");
+            }
+        });
     };
 
     render() {
-        const {username, password, csrfmiddlewaretoken} = this.state;
+        const {username, password} = this.state;
         return (
             <form onSubmit={this.handleSubmit}>
-                <CSRFToken/>
                 <div className="field">
                     <label className="label">Username</label>
                     <div className="control">

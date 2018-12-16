@@ -1,6 +1,6 @@
 import uuid
 
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 
 from AppMusic.models import Artist
 from AppMusic.serializers import ArtistSerializer
@@ -10,6 +10,10 @@ class ArtistViewSet(viewsets.ModelViewSet):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
     lookup_field = 'guid'
+
+    permission_classes = (
+        permissions.IsAuthenticated,
+    )
 
     def perform_create(self, serializer):
         serializer.save(guid=str(uuid.uuid4()))
