@@ -12,17 +12,6 @@ class Registration extends Component {
         first_name: "",
         last_name: ""
     };
-    handleSubmit = event => {
-        event.preventDefault();
-        const {username, password, email, first_name, last_name} = this.state;
-        const lead = {username, password, email, first_name, last_name};
-        const conf = {
-            method: "post",
-            body: JSON.stringify(lead),
-            headers: new Headers({"Content-Type": "application/json"})
-        };
-        fetch(this.props.endpoint, conf).then(response => console.log(response));
-    };
 
     handleChange(event) {
         switch (event.target.name) {
@@ -52,6 +41,18 @@ class Registration extends Component {
                 });
                 break;
         }
+    };
+
+    handleSubmit = event => {
+        event.preventDefault();
+        const {username, password, email, first_name, last_name} = this.state;
+        const lead = {username, password, email, first_name, last_name};
+        const conf = {
+            method: "post",
+            body: JSON.stringify(lead),
+            headers: new Headers({"Content-Type": "application/json"})
+        };
+        fetch(this.props.endpoint, conf).then(response => console.log(response));
     };
 
     render() {

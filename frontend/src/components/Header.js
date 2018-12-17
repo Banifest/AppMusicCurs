@@ -44,6 +44,15 @@ class Header extends Component {
                 </button>}
                 {this.props.headerType === 2 && <br/>}
                 {this.props.headerType === 2 && <LogOut/>}
+                {this.props.headerType === 2 && <br/>}
+                {this.props.headerType === 2 && <button
+                    onClick={this.onClick.bind(this)}
+                    value={this.state.endpoint + "upload/"}
+                    className="button is-error"
+                    hidden="true"
+                >
+                    Upload
+                </button>}
                 <br/>
             </div>
         );

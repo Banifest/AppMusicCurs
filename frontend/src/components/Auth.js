@@ -9,6 +9,22 @@ class Auth extends Component {
         username: "",
         password: ""
     };
+
+    handleChange(event) {
+        switch (event.target.name) {
+            case  "username":
+                this.setState({
+                    username: event.target.value
+                });
+                break;
+            case "password":
+                this.setState({
+                    password: event.target.value
+                });
+                break;
+        }
+    };
+
     handleSubmit = event => {
         event.preventDefault();
         const {username, password} = this.state;
@@ -24,21 +40,6 @@ class Auth extends Component {
                 window.location.replace("/composition/");
             }
         });
-    };
-
-    handleChange(event) {
-        switch (event.target.name) {
-            case  "username":
-                this.setState({
-                    username: event.target.value
-                });
-                break;
-            case "password":
-                this.setState({
-                    password: event.target.value
-                });
-                break;
-        }
     };
 
     componentWillMount() {

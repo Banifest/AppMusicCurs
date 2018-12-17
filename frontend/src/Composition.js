@@ -61,13 +61,30 @@ class App extends React.Component {
                 });
                 break;
         }
-
     }
 
     handleClick(event) {
-        // this.setState({
-        //     inputValue: event.target.value
-        // });
+        if (this.state.artist_name !== "") {
+            this.state.name = urlParams["search_by_artist"];
+            fetch("http://127.0.0.1:8000/api/artist/composition_name/?search_by_artist=" + this.state.artist_name)
+                .then(response => {
+                    if (response.status !== 200) {
+                        return this.setState({placeholder: "Something went wrong"});
+                    }
+                    return response.json();
+                })
+                .then(data => this.setState({data: data, loaded: true}));
+        } else if (this.state.genre_name !== "") {
+            this.state.name = urlParams["search_by_artist"];
+            fetch("http://127.0.0.1:8000/api/genre/composition_name/?search_by_genre=" + this.state.genre_name)
+                .then(response => {
+                    if (response.status !== 200) {
+                        return this.setState({placeholder: "Something went wrong"});
+                    }
+                    return response.json();
+                })
+                .then(data => this.setState({data: data, loaded: true}));
+        }
     }
 
     componentWillMount() {
