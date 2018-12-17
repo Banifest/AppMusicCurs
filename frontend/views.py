@@ -16,6 +16,10 @@ def composition(request):
     return render(request, 'frontend/composition.html')
 
 
+def upload(request):
+    return render(request, 'frontend/upload.html')
+
+
 class LogOutView(TemplateView):
     def re_render_to_response(self, context, request: HttpRequest):
         if 'status_code' in request.GET:
