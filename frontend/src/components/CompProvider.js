@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 
-class DataProvider extends Component {
+class CompProvider extends Component {
     static propTypes = {
         endpoint: PropTypes.string.isRequired,
-        render: PropTypes.func.isRequired
+        render: PropTypes.func.isRequired,
+        name: PropTypes.string
     };
     state = {
         data: [],
@@ -38,4 +39,4 @@ class DataProvider extends Component {
     }
 }
 
-export default DataProvider;
+export default CompProvider;

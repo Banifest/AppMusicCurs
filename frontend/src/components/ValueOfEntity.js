@@ -1,25 +1,16 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 
-class DataProvider extends Component {
+class ValueOfEntity extends Component {
     static propTypes = {
         endpoint: PropTypes.string.isRequired,
         render: PropTypes.func.isRequired
     };
     state = {
-        data: [],
+        data: "",
         loaded: false,
         placeholder: "Loading..."
     };
-
-    componentWillMount() {
-        fetch(this.props.endpoint)
-            .then(response => {
-                if (response.status === 403) {
-                    window.location.replace("http://127.0.0.1:8000/");
-                }
-            });
-    }
 
     componentDidMount() {
         fetch(this.props.endpoint)
@@ -38,4 +29,4 @@ class DataProvider extends Component {
     }
 }
 
-export default DataProvider;
+export default ValueOfEntity;

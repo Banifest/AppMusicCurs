@@ -2,11 +2,12 @@ import json
 
 from django.contrib.auth import authenticate, login
 from django.http import HttpRequest, HttpResponse
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from AppMusic.models import User
+from AppMusic.permissions import IsUserOwner
 from AppMusic.serializers import UserSerializer
 
 
@@ -15,23 +16,23 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     lookup_field = 'username'
     permission_classes = (
-        # permissions.IsAuthenticated,
-        # IsUserOwner,
+        permissions.IsAuthenticated,
+        IsUserOwner,
     )
 
-    # def get_permissions(self):
-    #     if self.action == 'create':
-    #         permission_classes = [permissions.AllowAny]
-    #     elif self.action == 'login':
-    #         permission_classes = [permissions.AllowAny]
-    #     elif self.action == 'options':
-    #         permission_classes = [permissions.AllowAny]
-    #     else:
-    #         permission_classes = [
-    #             # IsUserOwner,
-    #             permissions.IsAuthenticated,
-    #         ]
-    #     return [permission() for permission in permission_classes]
+    def get_permissions(self):
+        if self.action == 'create':
+            permission_classes = [permissions.AllowAny]
+        elif self.action == 'login':
+            permission_classes = [permissions.AllowAny]
+        elif self.action == 'options':
+            permission_classes = [permissions.AllowAny]
+        else:
+            permission_classes = [
+                # IsUserOwner,
+                permissions.IsAuthenticated,
+            ]
+        return [permission() for permission in permission_classes]
 
     @action(methods=['POST'], detail=True, url_path='login')
     def login(self, request: HttpRequest, username=None):
@@ -75,11 +76,11 @@ class UserViewSet(viewsets.ModelViewSet):
     #     instance = get_object_or_404(queryset, username=pk)
     #     serializer = self.get_serializer(instance)
     #     return Response(serializer.data)
-    #
-    # def perform_create(self, serializer):
-    #     if 'password' not in self.request.data or self.request.data['password'] == '':
-    #         return Response('{"detail": "password is empty"}')
-    #     serializer.save()
-    #     user = User.objects.filter(username=self.request.data['username']).first()
-    #     user.set_password(self.request.data['password'])
-    #     user.save()
+
+    def perform_create(self, serializer):
+        if 'password' not in self.request.data or self.request.data['password'] == '':
+            return Response('{"detail": "password is empty"}')
+        serializer.save()
+        user = User.objects.filter(username=self.request.data['username']).first()
+        user.set_password(self.request.data['password'])
+        user.save()
