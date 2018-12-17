@@ -1,10 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import DataProvider from "./components/DataProvider";
 import CompositionList from "./components/CompositionList";
 import Header from "./components/Header";
 import SearchByArtist from "./components/SearchByArtist";
-import CompProvider from "./components/CompProvider";
 import SearchByGenre from "./components/SearchByGenre";
 
 var urlParams;
@@ -41,8 +39,7 @@ class App extends React.Component {
         if (urlParams["search_by_artist"] !== undefined) {
             this.state.artist_name = urlParams["search_by_artist"];
         }
-        if(urlParams["search_by_genre"] !== undefined)
-        {
+        if (urlParams["search_by_genre"] !== undefined) {
             this.state.genre_name = urlParams["search_by_genre"];
         }
         this.handleChange = this.handleChange.bind(this);
@@ -64,13 +61,30 @@ class App extends React.Component {
                 });
                 break;
         }
-
     }
 
     handleClick(event) {
-        // this.setState({
-        //     inputValue: event.target.value
-        // });
+        if (this.state.artist_name !== "") {
+            fetch("http://127.0.0.1:8000/api/artist/composition_name/?search_by_artist=" + this.state.artist_name)
+                .then(response =>
+                {
+                    if (response.status !== 200) {
+                        return this.setState({placeholder: "Something went wrong"});
+                    }
+                    return response.json();
+                })
+                .then(data => this.setState({data: data, loaded: true}));
+        } else if (this.state.genre_name !== "") {
+            fetch("http://127.0.0.1:8000/api/genre/composition_name/?search_by_genre=" + this.state.genre_name)
+                .then(response =>
+                {
+                    if (response.status !== 200) {
+                        return this.setState({placeholder: "Something went wrong"});
+                    }
+                    return response.json();
+                })
+                .then(data => this.setState({data: data, loaded: true}));
+        }
     }
 
     componentWillMount() {

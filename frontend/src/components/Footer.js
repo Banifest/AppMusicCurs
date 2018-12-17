@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import LogOut from "./LogOut";
 
 class Footer extends Component {
     static propTypes = {
@@ -10,8 +9,7 @@ class Footer extends Component {
         endpoint: "http://127.0.0.1:8000/"
     };
 
-    onClick(event)
-    {
+    onClick(event) {
         window.location.replace(event.target.value);
     }
 

@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Auth from "./components/Auth";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Registration from "./components/Registration";
+
+import SelectionGenre from "./components/uploader/SelectionGenre";
+import SelectionArtist from "./components/uploader/SelectionArtist";
 
 const App = () => (
     <React.Fragment align="center">
         <Header headerType={2}/>
-        <Registration endpoint="http://127.0.0.1:8000/api/user/" />
-        <Footer />
+        <SelectionGenre />
+        <SelectionArtist />
+        <Footer/>
     </React.Fragment>
 );
 const wrapper = document.getElementById("app");

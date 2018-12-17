@@ -53,7 +53,9 @@ const CompositionList = ({data}) =>
                                         return (<td key={key(item)}>
                                             <ValueOfEntity
                                                 endpoint={"http://127.0.0.1:8000/api/artist/" + item[1]}
-                                                render={(data)=>{ return (<div>{data.name}</div>)}}
+                                                render={(data) => {
+                                                    return (<div>{data.name}</div>)
+                                                }}
                                             /></td>);
                                     case "genre":
                                         return (<td key={key(item)}>{item[1]}</td>);

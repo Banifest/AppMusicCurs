@@ -32,5 +32,8 @@
     "weak-key": "^1.0.1",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "react-select": "^2.1.2"
   }
 }

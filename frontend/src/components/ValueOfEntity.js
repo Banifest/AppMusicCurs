@@ -12,8 +12,7 @@ class ValueOfEntity extends Component {
         placeholder: "Loading..."
     };
 
-    componentDidMount()
-    {
+    componentDidMount() {
         fetch(this.props.endpoint)
             .then(response => {
                 if (response.status !== 200) {
@@ -24,8 +23,7 @@ class ValueOfEntity extends Component {
             .then(data => this.setState({data: data, loaded: true}));
     }
 
-    render()
-    {
+    render() {
         const {data, loaded, placeholder} = this.state;
         return loaded ? this.props.render(data) : <p>{placeholder}</p>;
     }

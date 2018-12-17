@@ -25,15 +25,15 @@ class Header extends Component {
                 >
                     Main
                 </button>
-                <br />
-                <button
+                <br/>
+                {this.props.headerType === 2 && <button
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint + "composition/"}
                     className="button is-error"
                 >
                     Composition
-                </button>
-                {this.props.headerType === 1 && <br />}
+                </button>}
+                {this.props.headerType === 1 && <br/>}
                 {this.props.headerType === 1 && <button
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint + "registration/"}
@@ -42,9 +42,9 @@ class Header extends Component {
                 >
                     Registration
                 </button>}
-                {this.props.headerType === 2 && <br />}
+                {this.props.headerType === 2 && <br/>}
                 {this.props.headerType === 2 && <LogOut/>}
-                {this.props.headerType === 2 && <br />}
+                {this.props.headerType === 2 && <br/>}
                 {this.props.headerType === 2 && <button
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint + "upload/"}
@@ -53,7 +53,7 @@ class Header extends Component {
                 >
                     Upload
                 </button>}
-                <br />
+                <br/>
             </div>
         );
     }

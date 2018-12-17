@@ -7,9 +7,9 @@ import Footer from "./Footer";
 const App = () => (
     <div align="center">
         <Header headerType={1}/>
-        <br />
-        <Auth endpoint="api/user/login" />
-        <Footer />
+        <br/>
+        <Auth endpoint="api/user/login"/>
+        <Footer/>
     </div>
 );
 const wrapper = document.getElementById("app");
