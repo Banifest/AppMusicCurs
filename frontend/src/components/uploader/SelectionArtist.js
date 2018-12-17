@@ -10,6 +10,7 @@ const options = [
 class SelectionArtist extends React.Component {
     state = {
         selectedOption: null,
+        options: []
     };
     handleChange = (selectedOption) => {
         this.setState({selectedOption});

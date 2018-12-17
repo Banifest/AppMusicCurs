@@ -1,5 +1,8 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import SelectionGenre from "./SelectionGenre";
+import SelectionArtist from "./SelectionArtist";
+import DataProvider from "../DataProvider";
 
 class UploaderForm extends Component {
     static propTypes = {
@@ -30,6 +33,23 @@ class UploaderForm extends Component {
         return (
             <div className="column">
                 <form onSubmit={this.handleSubmit}>
+
+                    <div className="field">
+                        <label className="label">Genre</label>
+                        <div className="control">
+                            <DataProvider
+                                endpoint="http://127.0.0.1:8000/api/genre/"
+                                render={data => <SelectionGenre options={data}/>}  />
+                        </div>
+                    </div>
+
+                    <div className="field">
+                        <label className="label">Artist</label>
+                        <div className="control">
+                            <SelectionArtist/>
+                        </div>
+                    </div>
+
                     <div className="field">
                         <label className="label">Name</label>
                         <div className="control">
