@@ -24,13 +24,18 @@
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-emotion": "^10.0.5",
     "cypress": "^3.1.3",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-select": "latest",
     "weak-key": "^1.0.1",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "class-utils": "^0.3.6",
+    "react-select": "^2.1.2"
   }
 }
