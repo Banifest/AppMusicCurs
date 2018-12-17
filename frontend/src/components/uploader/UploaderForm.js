@@ -3,23 +3,59 @@ import PropTypes from "prop-types";
 import SelectionGenre from "./SelectionGenre";
 import SelectionArtist from "./SelectionArtist";
 import DataProvider from "../DataProvider";
+import SearchByArtist from "../SearchByArtist";
 
 class UploaderForm extends Component {
     static propTypes = {
         endpoint: PropTypes.string.isRequired
     };
     state = {
-        username: "",
-        email: "",
-        first_name: ""
+        name: "",
+        albums: "",
+        description: "",
+        file: "",
+        SelectGenre: "",
+        SelectArtist: ""
     };
-    handleChange = e => {
-        this.setState({[e.target.username]: e.target.value});
+    handleChange = event => {
+        switch (event.target.name) {
+            case  "name":
+                this.setState({
+                    name: event.target.value
+                });
+                break;
+            case "albums":
+                this.setState({
+                    albums: event.target.value
+                });
+                break;
+            case "description":
+                this.setState({
+                    description: event.target.value
+                });
+                break;
+            case "file":
+                this.setState({
+                    file: event.target.value
+                });
+                break;
+            case "SelectGenre":
+                this.setState({
+                    SelectGenre: event.target.value
+                });
+                break;
+            case "SelectArtist":
+                this.setState({
+                    SelectArtist: event.target.value
+                });
+                break;
+        }
     };
-    handleSubmit = e => {
-        e.preventDefault();
-        const {username, email, first_name} = this.state;
-        const lead = {username, email, first_name};
+
+    handleSubmit = event => {
+        event.preventDefault();
+        const {name, albums, description, file} = this.state;
+        const lead = {name, albums, description, file};
         const conf = {
             method: "post",
             body: JSON.stringify(lead),
@@ -29,26 +65,10 @@ class UploaderForm extends Component {
     };
 
     render() {
-        const {username, email, first_name} = this.state;
+        const {name, albums, description, file} = this.state;
         return (
             <div className="column">
                 <form onSubmit={this.handleSubmit}>
-
-                    <div className="field">
-                        <label className="label">Genre</label>
-                        <div className="control">
-                            <DataProvider
-                                endpoint="http://127.0.0.1:8000/api/genre/"
-                                render={data => <SelectionGenre options={data}/>}  />
-                        </div>
-                    </div>
-
-                    <div className="field">
-                        <label className="label">Artist</label>
-                        <div className="control">
-                            <SelectionArtist/>
-                        </div>
-                    </div>
 
                     <div className="field">
                         <label className="label">Name</label>
@@ -56,39 +76,81 @@ class UploaderForm extends Component {
                             <input
                                 className="input"
                                 type="text"
-                                name="username"
+                                name="name"
                                 onChange={this.handleChange}
-                                value={username}
+                                value={name}
                                 required
                             />
                         </div>
                     </div>
+
                     <div className="field">
-                        <label className="label">Email</label>
-                        <div className="control">
-                            <input
-                                className="input"
-                                type="email"
-                                name="email"
-                                onChange={this.handleChange}
-                                value={email}
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div className="field">
-                        <label className="label">Message</label>
+                        <label className="label">Album</label>
                         <div className="control">
                             <input
                                 className="input"
                                 type="text"
-                                name="first_name"
+                                name="albums"
                                 onChange={this.handleChange}
-                                value={first_name}
+                                value={albums}
                                 required
                             />
                         </div>
                     </div>
+
+                    <div className="field">
+                        <label className="label">Description</label>
+                        <div className="control">
+                            <input
+                                className="input"
+                                type="text"
+                                name="description"
+                                onChange={this.handleChange}
+                                value={description}
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className="field">
+                        <label className="label">Genre</label>
+                        <div className="control">
+                            <DataProvider
+                                endpoint="http://127.0.0.1:8000/api/genre/"
+                                render={data => <SelectionGenre
+                                    options={data}
+                                    input={this.state.SelectGenre}
+                                    handleChange={this.handleChange}/>}/>
+                        </div>
+                    </div>
+
+                    <div className="field">
+                        <label className="label">Artist</label>
+                        <div className="control">
+                            <DataProvider
+                                endpoint="http://127.0.0.1:8000/api/artist/"
+                                render={data => <SelectionArtist
+                                    options={data}
+                                    input={this.state.SelectArtist}
+                                    handleChange={this.handleChange}/>}/>
+                        </div>
+                    </div>
+
+
+                    <div className="field">
+                        <label className="label">Song</label>
+                        <div className="control">
+                            <input
+                                className="input"
+                                type="file"
+                                name="file"
+                                onChange={this.handleChange}
+                                value={file}
+                                required
+                            />
+                        </div>
+                    </div>
+
                     <div className="control">
                         <button type="submit" className="button is-info">
                             Send message

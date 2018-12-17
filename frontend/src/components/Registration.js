@@ -32,12 +32,12 @@ class Registration extends Component {
                 break;
             case "first_name":
                 this.setState({
-                    first_name: event.target.value
+                    first_name: event.target
                 });
                 break;
             case "last_name":
                 this.setState({
-                    last_name: event.target.value
+                    last_name: event.target
                 });
                 break;
         }

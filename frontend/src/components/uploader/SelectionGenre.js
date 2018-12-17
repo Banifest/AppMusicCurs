@@ -28,6 +28,7 @@ class SelectionGenre extends React.Component {
     };
     handleChange = (selectedOption) => {
         this.setState({selectedOption});
+        this.props.handleChange({target: {name: "SelectGenre", value: selectedOption.value}});
         console.log(`Option selected:`, selectedOption);
     };
 
@@ -36,6 +37,7 @@ class SelectionGenre extends React.Component {
 
         return (
             <Select
+                required
                 value={selectedOption}
                 onChange={this.handleChange}
                 options={get_options(this.props.options)}
