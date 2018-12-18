@@ -5,17 +5,36 @@ import SelectionArtist from "./SelectionArtist";
 import DataProvider from "../DataProvider";
 import SearchByArtist from "../SearchByArtist";
 
+function dataUriToBlob(dataUri) {
+    const binary = atob(dataUri.split(',')[1]);
+    let array = [];
+    for (let i = 0; i < binary.length; i++) array.push(binary.charCodeAt(i));
+    return new Blob([new Uint8Array(array)], {type: 'audio/mp3'});
+}
+
+function imageToFormData(audio, fieldName = 'composition_url') {
+    const formData = new FormData();
+    formData.append(fieldName, dataUriToBlob(audio));
+    return formData;
+}
+
 class UploaderForm extends Component {
     static propTypes = {
         endpoint: PropTypes.string.isRequired
     };
+
+    constructor(props) {
+        super(props);
+        this.inpuElement = null;
+    }
+
     state = {
         name: "",
         albums: "",
         description: "",
-        file: "",
-        SelectGenre: "",
-        SelectArtist: ""
+        composition_url: "",
+        genre: "",
+        artist: "",
     };
     handleChange = event => {
         switch (event.target.name) {
@@ -34,19 +53,19 @@ class UploaderForm extends Component {
                     description: event.target.value
                 });
                 break;
-            case "file":
+            case "composition_url":
                 this.setState({
-                    file: event.target.value
+                    composition_url: event.target.files[0]
                 });
                 break;
             case "SelectGenre":
                 this.setState({
-                    SelectGenre: event.target.value
+                    genre: event.target.value
                 });
                 break;
             case "SelectArtist":
                 this.setState({
-                    SelectArtist: event.target.value
+                    artist: event.target.value
                 });
                 break;
         }
@@ -54,18 +73,39 @@ class UploaderForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const {name, albums, description, file} = this.state;
-        const lead = {name, albums, description, file};
-        const conf = {
-            method: "post",
-            body: JSON.stringify(lead),
-            headers: new Headers({"Content-Type": "application/json"})
-        };
-        fetch(this.props.endpoint, conf).then(response => console.log(response));
+
+        const data = new FormData();
+        console.log(this.state.composition_url);
+        data.append("composition_url", this.state.composition_url, this.state.composition_url.name);
+        data.append("name", this.state.name);
+        data.append("albums", this.state.albums);
+        data.append("description", this.state.description);
+        data.append("artist", this.state.artist);
+        data.append("genre", this.state.genre);
+
+        console.log(data);
+
+        fetch(this.props.endpoint,
+            {
+                method: 'POST',
+                body: data,
+                mimeType: "multipart/form-data",
+            }).then(response => console.log(response));
+
+        // const {name, albums, description, composition_url, genre, artist} = this.state;
+        // const lead = {name, albums, description, composition_url, genre, artist};
+        // const conf = {
+        //     method: "post",
+        //     body: JSON.stringify(lead),
+        //     headers: {
+        //         'content-type': 'application/x-www-form-urlencoded',
+        //     },
+        // };
+        // fetch(this.props.endpoint, conf).then(response => console.log(response));
     };
 
     render() {
-        const {name, albums, description, file} = this.state;
+        const {name, albums, description, file, genre, artist} = this.state;
         return (
             <div className="column">
                 <form onSubmit={this.handleSubmit}>
@@ -119,7 +159,7 @@ class UploaderForm extends Component {
                                 endpoint="http://127.0.0.1:8000/api/genre/"
                                 render={data => <SelectionGenre
                                     options={data}
-                                    input={this.state.SelectGenre}
+                                    input={this.state.genre}
                                     handleChange={this.handleChange}/>}/>
                         </div>
                     </div>
@@ -131,7 +171,7 @@ class UploaderForm extends Component {
                                 endpoint="http://127.0.0.1:8000/api/artist/"
                                 render={data => <SelectionArtist
                                     options={data}
-                                    input={this.state.SelectArtist}
+                                    input={this.state.artist}
                                     handleChange={this.handleChange}/>}/>
                         </div>
                     </div>
@@ -142,18 +182,20 @@ class UploaderForm extends Component {
                         <div className="control">
                             <input
                                 className="input"
+                                accept=".mp3"
                                 type="file"
-                                name="file"
+                                name="composition_url"
                                 onChange={this.handleChange}
+                                multiple={false}
                                 value={file}
                                 required
                             />
                         </div>
                     </div>
 
-                    <div className="control">
+                    <div className="control" align="center">
                         <button type="submit" className="button is-info">
-                            Send message
+                            Add song!
                         </button>
                     </div>
                 </form>

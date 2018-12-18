@@ -62,7 +62,15 @@ const CompositionList = ({data}) =>
                                     case "composition_url":
                                         return (<td key={key(item)}>
                                             <audio controls>
-                                                <source src={item[1]}/>
+                                                <source src={
+                                                    item[1].replace(
+                                                        "api/artist/composition_name/frontend/static/composition/",
+                                                        "static/composition/").
+                                                    replace(
+                                                        "api/genre/composition_name/frontend/static/composition/",
+                                                        "static/composition/"
+                                                    )
+                                                }/>
                                             </audio>
                                         </td>);
                                 }

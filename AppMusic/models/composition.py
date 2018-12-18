@@ -4,7 +4,7 @@ from django.db import models
 class Composition(models.Model):
     guid = models.UUIDField(primary_key=True, auto_created=True)
     name = models.TextField()
-    composition_url = models.URLField()
+    composition_url = models.FileField(upload_to='frontend/static/composition/')
     albums = models.TextField()
     description = models.TextField()
 

@@ -74,6 +74,7 @@ class App extends React.Component {
                     return response.json();
                 })
                 .then(data => this.setState({data: data, loaded: true}));
+            this.state.artist_name = "";
         } else if (this.state.genre_name !== "") {
             fetch("http://127.0.0.1:8000/api/genre/composition_name/?search_by_genre=" + this.state.genre_name)
                 .then(response =>
@@ -84,6 +85,7 @@ class App extends React.Component {
                     return response.json();
                 })
                 .then(data => this.setState({data: data, loaded: true}));
+            this.state.genre_name = "";
         }
     }
 
