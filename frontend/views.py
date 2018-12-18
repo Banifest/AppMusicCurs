@@ -31,6 +31,7 @@ class LogOutView(TemplateView):
         response.delete_cookie('login')
         response.delete_cookie('sessionid')
         response.delete_cookie('csrftoken')
+        response["Cache-Control"] = "no-cache, no-store, must-revalidate"
         return response
 
     def post(self, request: HttpRequest) -> HttpResponse:
@@ -38,4 +39,5 @@ class LogOutView(TemplateView):
         response.delete_cookie('login')
         response.delete_cookie('sessionid')
         response.delete_cookie('csrftoken')
+        response["Cache-Control"] = "no-cache, no-store, must-revalidate"
         return response

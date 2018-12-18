@@ -5,15 +5,16 @@ class LogOut extends Component {
     static propTypes = {
         endpoint: PropTypes.string,
     };
-    state = {
-        endpoint: "http://127.0.0.1:8000/logout/"
-    };
 
     onClick(event) {
         document.cookie.split(";").forEach(function (c) {
             document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
         });
-        window.location.replace(this.state.endpoint);
+        const conf = {
+            headers: new Headers({"Cache-Control": "no-cache, no-store, must-revalidate"})
+        };
+
+        fetch("http://127.0.0.1:8000/logout/",conf).then(() => window.location.replace("http://127.0.0.1:8000/"));
     }
 
     render() {

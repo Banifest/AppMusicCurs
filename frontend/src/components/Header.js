@@ -17,7 +17,7 @@ class Header extends Component {
 
     render() {
         return (
-            <div align="center">
+            <div align="center" style={{backgroundColor: '#1676c2'}}>
                 <button
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint}
@@ -44,7 +44,6 @@ class Header extends Component {
                 </button>}
                 {this.props.headerType === 2 && <br/>}
                 {this.props.headerType === 2 && <LogOut/>}
-                {this.props.headerType === 2 && <br/>}
                 {this.props.headerType === 2 && <button
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint + "upload/"}

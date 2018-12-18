@@ -56,7 +56,7 @@ class Auth extends Component {
     componentWillMount() {
         fetch(this.props.endpoint)
             .then(response => {
-                if (response.status !== 403) {
+                if (response.status !== 403 && response.status !== 400) {
                     window.location.replace("http://127.0.0.1:8000/composition/");
                 }
                 return response.json();
@@ -96,7 +96,7 @@ class Auth extends Component {
                         </div>
                     </div>
                     <div className="control">
-                        <button type="submit" className="button is-info">
+                        <button type="submit" className="button is-info" style={{align: "center"}}>
                             Auth
                         </button>
                     </div>

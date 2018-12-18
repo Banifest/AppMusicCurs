@@ -44,6 +44,7 @@ class App extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.artistClick = this.artistClick.bind(this);
         console.log(this.props)
     }
 
@@ -63,29 +64,31 @@ class App extends React.Component {
         }
     }
 
-    handleClick(event) {
+    artistClick(event) {
         if (this.state.artist_name !== "") {
             fetch("http://127.0.0.1:8000/api/artist/composition_name/?search_by_artist=" + this.state.artist_name)
-                .then(response =>
-                {
+                .then(response => {
                     if (response.status !== 200) {
                         return this.setState({placeholder: "Something went wrong"});
                     }
                     return response.json();
                 })
                 .then(data => this.setState({data: data, loaded: true}));
-            this.state.artist_name = "";
-        } else if (this.state.genre_name !== "") {
+            this.setState({artist_name: ""});
+        }
+    }
+
+    handleClick(event) {
+        if (this.state.genre_name !== "") {
             fetch("http://127.0.0.1:8000/api/genre/composition_name/?search_by_genre=" + this.state.genre_name)
-                .then(response =>
-                {
+                .then(response => {
                     if (response.status !== 200) {
                         return this.setState({placeholder: "Something went wrong"});
                     }
                     return response.json();
                 })
                 .then(data => this.setState({data: data, loaded: true}));
-            this.state.genre_name = "";
+            this.setState({genre_name: ""});
         }
     }
 
@@ -119,12 +122,20 @@ class App extends React.Component {
                 <Header headerType={2}/>
                 <br/>
                 <CompositionList data={this.state.data}/>
-                <SearchByArtist handleChange={this.handleChange} handleClick={this.handleClick}/>
+                <SearchByArtist handleChange={this.handleChange} handleClick={this.artistClick}/>
                 <SearchByGenre handleChange={this.handleChange} handleClick={this.handleClick}/>
             </React.Fragment>
         );
     }
 }
 
-const wrapper = document.getElementById("app");
-wrapper ? ReactDOM.render(<App/>, wrapper) : null;
+const
+    wrapper = document.getElementById("app");
+wrapper
+    ?
+    ReactDOM
+        .render(
+            <App/>,
+            wrapper
+        ) :
+    null;
