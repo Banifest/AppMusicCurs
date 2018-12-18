@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import ErrorDisplay from "./ErrorDisplay";
 
 class Registration extends Component {
     static propTypes = {
         endpoint: PropTypes.string.isRequired
     };
     state = {
+        error: "",
         username: "",
         password: "",
         email: "",
@@ -32,12 +34,12 @@ class Registration extends Component {
                 break;
             case "first_name":
                 this.setState({
-                    first_name: event.target
+                    first_name: event.target.value
                 });
                 break;
             case "last_name":
                 this.setState({
-                    last_name: event.target
+                    last_name: event.target.value
                 });
                 break;
         }
@@ -52,7 +54,31 @@ class Registration extends Component {
             body: JSON.stringify(lead),
             headers: new Headers({"Content-Type": "application/json"})
         };
-        fetch(this.props.endpoint, conf).then(response => console.log(response));
+        fetch(this.props.endpoint, conf).then((response) => {
+            console.log(response);
+            if (!response.status.toString().startsWith("2")) {
+                return response.json()
+            }
+        }).then(
+            (data) => {
+                console.log(data);
+                if (data["username"]) {
+                    this.setState({
+                        error: data["username"][0]
+                    });
+                } else if(data["password"])
+                {
+                    this.setState({
+                        error: data["password"][0]
+                    });
+                } else if(data["email"])
+                {
+                    this.setState({
+                        error: data["email"][0]
+                    });
+                }
+
+            })
     };
 
     render() {
@@ -128,6 +154,7 @@ class Registration extends Component {
                         Register
                     </button>
                 </div>
+                <ErrorDisplay message={this.state.error}/>
             </form>
         );
     }

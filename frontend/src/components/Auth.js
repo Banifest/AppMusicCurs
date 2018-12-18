@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import ErrorDisplay from "./ErrorDisplay";
 
 class Auth extends Component {
     static propTypes = {
@@ -7,7 +8,8 @@ class Auth extends Component {
     };
     state = {
         username: "",
-        password: ""
+        password: "",
+        error: ""
     };
 
     handleChange(event) {
@@ -38,8 +40,17 @@ class Auth extends Component {
             console.log(response);
             if (response.status === 201) {
                 window.location.replace("/composition/");
+            } else {
+                return response.json()
             }
-        });
+        }).then(
+            (data) => {
+                console.log(data);
+                this.setState({
+                    error:  data["detail"]
+                });
+            }
+        );
     };
 
     componentWillMount() {
@@ -90,6 +101,7 @@ class Auth extends Component {
                         </button>
                     </div>
                 </form>
+                <ErrorDisplay message={this.state.error}/>
             </div>
         );
     }

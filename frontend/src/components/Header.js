@@ -25,7 +25,7 @@ class Header extends Component {
                 >
                     Main
                 </button>
-                <br/>
+                {this.props.headerType === 2 && <br/>}
                 {this.props.headerType === 2 && <button
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint + "composition/"}

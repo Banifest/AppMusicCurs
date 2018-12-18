@@ -9,13 +9,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         lookup_field='username'
     )
 
-    #
-    # favorites = serializers.ManyRelatedField(
-    #     slug_field='guid',
-    #     read_only=True,
-    #     # queryset=Composition.objects.all()
-    # )
-
     class Meta:
         model = User
         fields = (
@@ -24,5 +17,4 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'first_name',
             'last_name',
             'email',
-            # 'favorites',
         )
