@@ -59,6 +59,10 @@ class Registration extends Component {
             if (!response.status.toString().startsWith("2")) {
                 return response.json()
             }
+            else
+            {
+                window.location.replace("http://127.0.0.1:8000/");
+            }
         }).then(
             (data) => {
                 console.log(data);

@@ -9,7 +9,7 @@ class ErrorDisplay extends React.Component {
     render() {
         return (
             <div>
-                <label color="red">
+                <label style={{color: "red"}}>
                     {this.props.message}
                 </label>
             </div>
