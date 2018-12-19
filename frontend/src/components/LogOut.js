@@ -5,6 +5,7 @@ class LogOut extends Component {
     static propTypes = {
         endpoint: PropTypes.string,
     };
+    buttonStyle = {width: "120px"};
 
     onClick(event) {
         document.cookie.split(";").forEach(function (c) {
@@ -23,6 +24,7 @@ class LogOut extends Component {
                 <button
                     className="button is-info"
                     onClick={this.onClick.bind(this)}
+                    style={this.buttonStyle}
                 >
                     LogOut
                 </button>

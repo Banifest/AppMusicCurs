@@ -14,6 +14,7 @@ class Header extends Component {
     onClick(event) {
         window.location.replace(event.target.value);
     }
+    buttonStyle = {width: "120px"};
 
     render() {
         return (
@@ -22,6 +23,7 @@ class Header extends Component {
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint}
                     className="button is-info"
+                    style={this.buttonStyle}
                 >
                     Main
                 </button>
@@ -30,6 +32,7 @@ class Header extends Component {
                     onClick={this.onClick.bind(this)}
                     value={this.state.endpoint + "composition/"}
                     className="button is-error"
+                    style={this.buttonStyle}
                 >
                     Composition
                 </button>}
@@ -39,6 +42,7 @@ class Header extends Component {
                     value={this.state.endpoint + "registration/"}
                     className="button is-error"
                     hidden="true"
+                    style={this.buttonStyle}
                 >
                     Registration
                 </button>}
@@ -49,6 +53,7 @@ class Header extends Component {
                     value={this.state.endpoint + "upload/"}
                     className="button is-error"
                     hidden="true"
+                    style={this.buttonStyle}
                 >
                     Upload
                 </button>}

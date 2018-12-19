@@ -74,7 +74,7 @@ class App extends React.Component {
                     return response.json();
                 })
                 .then(data => this.setState({data: data, loaded: true}));
-            this.setState({artist_name: ""});
+            //this.setState({artist_name: ""});
         }
     }
 
@@ -88,7 +88,7 @@ class App extends React.Component {
                     return response.json();
                 })
                 .then(data => this.setState({data: data, loaded: true}));
-            this.setState({genre_name: ""});
+            //this.setState({genre_name: ""});
         }
     }
 
