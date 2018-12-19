@@ -4,6 +4,7 @@ import SelectionGenre from "./SelectionGenre";
 import SelectionArtist from "./SelectionArtist";
 import DataProvider from "../DataProvider";
 import SearchByArtist from "../SearchByArtist";
+import ErrorDisplay from "../ErrorDisplay";
 
 function dataUriToBlob(dataUri) {
     const binary = atob(dataUri.split(',')[1]);
@@ -35,6 +36,7 @@ class UploaderForm extends Component {
         composition_url: "",
         genre: "",
         artist: "",
+        error: ""
     };
     handleChange = event => {
         switch (event.target.name) {
@@ -90,18 +92,23 @@ class UploaderForm extends Component {
                 method: 'POST',
                 body: data,
                 mimeType: "multipart/form-data",
-            }).then(response => console.log(response));
-
-        // const {name, albums, description, composition_url, genre, artist} = this.state;
-        // const lead = {name, albums, description, composition_url, genre, artist};
-        // const conf = {
-        //     method: "post",
-        //     body: JSON.stringify(lead),
-        //     headers: {
-        //         'content-type': 'application/x-www-form-urlencoded',
-        //     },
-        // };
-        // fetch(this.props.endpoint, conf).then(response => console.log(response));
+            }).then((response) => {
+                console.log(response);
+                if (response.status === 201)
+                {
+                    this.setState({
+                        error: "File uploaded"
+                    });
+                }
+                else
+                {
+                    this.setState({
+                        error: "File doesn't uploaded"
+                    });
+                }
+        }).then( data => {
+            
+        });
     };
 
     render() {
@@ -199,6 +206,7 @@ class UploaderForm extends Component {
                         </button>
                     </div>
                 </form>
+                <ErrorDisplay message={this.state.error}/>
             </div>
         );
     }

@@ -29,7 +29,7 @@ class UserViewSet(viewsets.ModelViewSet):
             permission_classes = [permissions.AllowAny]
         else:
             permission_classes = [
-                # IsUserOwner,
+                IsUserOwner,
                 permissions.IsAuthenticated,
             ]
         return [permission() for permission in permission_classes]
@@ -53,7 +53,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 )
         else:
             return HttpResponse(
-                json.dumps({'detail': "don't right login or password"}),
+                json.dumps({'detail': "Incorrect login or password"}),
                 status=401,
                 content_type='application/json'
             )
